@@ -1,0 +1,7 @@
+body {
+  background:#eeeeee; 
+}
+
+::placeholder {
+  color: gray;
+}
