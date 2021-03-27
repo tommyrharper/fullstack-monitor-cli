@@ -22,10 +22,10 @@ module.exports = env => {
       contentBase: path.resolve(__dirname, 'dist'),
       open: true,
       clientLogLevel: 'silent',
-      port: 9000,
+      port: 4732,
       historyApiFallback: true,
       hot: true,
-      proxy: { "/**": { target: 'http://localhost:3000', secure: false }  }
+      proxy: { "/**": { target: 'http://localhost:3861', secure: false }  }
     },
     module: {
       rules: [

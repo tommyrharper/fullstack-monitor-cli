@@ -7,7 +7,7 @@ const io = require('socket.io')(http);
 
 const apiRouter = require('./routes/api');
 
-const port = process.env.port || 3000;
+const port = process.env.port || 3861;
 
 app.use(express.json());
 
@@ -23,16 +23,6 @@ app.use('/api', apiRouter);
 
 // serve index.html on the route '/'
 app.get('/', (req, res) => res.status(200).sendFile(HTML_FILE));
-
-const mockResponse = {
-  foo: 'bar',
-  bar: 'foo'
-};
-
-app.get('/apiTest', (req, res) => {
-  console.log('hit /api');
-  res.send(mockResponse);
-});
 
 // global error handler
 // eslint-disable-next-line no-unused-vars

@@ -46,5 +46,5 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "webpack-dev-server": "^3.11.2"
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "http://localhost:3861"
 }
