@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
-const apiRouter = require('./routes/api');
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+const apiRouter = require('./routes/api');
+
 const port = process.env.port || 3000;
 
 app.use(express.json());
@@ -42,8 +46,17 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+io.on('connection', (socket) => {
+  console.log('connected');
+  socket.on('chat message', (msg) => {
+    console.log('received from client: ', msg);
+    // io.emit('chat message', msg);
+    io.emit('chat message', 'hi from server');
+  });
+});
+
 // listens on port 3000 -> http://localhost:3000/
-app.listen(port, () => {
+http.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`App listening on port: ${port}`);
 });
