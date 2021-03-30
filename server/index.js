@@ -45,9 +45,11 @@ io.on("connection", (socket) => {
   const data = {
     allLogs: getAllLogs()
   };
-  io.emit('display-logs', data);
+  socket.on('get initial logs', () => {
+    io.emit('display-logs', data);
+  });
   socket.on("store-logs", (logsObj) => {
-    storeLogs(logsObj.type, logsObj.logs);
+    storeLogs(logsObj.type, logsObj.logs, io);
   });
 });
 

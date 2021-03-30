@@ -48,7 +48,7 @@ function getAllLogs() {
   return allLogs;
 }
 
-function storeLogs(type, logs) {
+function storeLogs(type, logs, io) {
   // create an emtpy object to hold all the existing json elements
   let obj = {
     table: [],
@@ -74,6 +74,15 @@ function storeLogs(type, logs) {
 
     // write object obj that hold all existing data and new requests to request_response json file
     fs.writeFileSync(path.resolve(__dirname, `../data/${type}Logs.json`), JSON.stringify(obj, null, 2), 'UTF-8');
+
+    const logsData = {
+      allLogs: getAllLogs()
+    };
+
+    // Send via socket.io
+    if (io) {
+      io.emit('display-logs', logsData);
+    }
   });
 }
 

@@ -27,19 +27,17 @@ class App extends Component {
   }
   componentDidMount() {
     this.state.socket.on("display-logs", (msg) => {
-      console.log("recieved message from server: ", msg);
       this.setState({logs: msg.allLogs});
     });
+    this.state.socket.emit('get initial logs', true);
   }
 
   sendWSMessageArrow = () => {
-    console.log('inside sendWSMessage Arrow');
     this.state.socket.emit("display-logs", "hi from client arrow");
   };
 
   render() {
     const { logs } = this.state;
-    console.log(`this.state.logs`, this.state.logs);
     return (
       <div>
         {/* <Button onClick={this.sendWSMessageArrow}>Yo Arrow</Button> */}
