@@ -6,7 +6,7 @@ const loggerController = require('../controllers/loggerController');
 const router = express.Router();
 
 const webSocketMiddleware = (req, res, next) => {
-  io.emit('chat message', res.locals.logs);
+  io.emit('display-logs', res.locals.logs);
   next();
 };
 
