@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require('cors');
-const { getAllLogs } = require('./helpers/helpers');
+const { getAllLogs, storeLogs, storeRequests } = require('./helpers/helpers');
 
 const {
   serverPort, app, http, io,
@@ -46,9 +46,8 @@ io.on("connection", (socket) => {
     allLogs: getAllLogs()
   };
   io.emit('display-logs', data);
-  socket.on("store-logs", (msg) => {
-    console.log("received from exampple project client: ", msg);
-    // store the logs.
+  socket.on("store-logs", (logsObj) => {
+    storeLogs(logsObj.type, logsObj.logs);
   });
 });
 
