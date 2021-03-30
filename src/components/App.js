@@ -26,20 +26,15 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    this.state.socket.on("chat message", (msg) => {
+    this.state.socket.on("display-logs", (msg) => {
       console.log("recieved message from server: ", msg);
       this.setState({logs: msg.allLogs});
     });
-    fetch('/api/logs')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({logs: res.allLogs})
-      })
   }
 
   sendWSMessageArrow = () => {
     console.log('inside sendWSMessage Arrow');
-    this.state.socket.emit("chat message", "hi from client arrow");
+    this.state.socket.emit("display-logs", "hi from client arrow");
   };
 
   render() {
