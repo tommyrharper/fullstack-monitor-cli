@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require('cors');
+const { getAllLogs } = require('./helpers/helpers');
 
 const {
   serverPort, app, http, io,
@@ -41,10 +42,13 @@ app.use((err, req, res, next) => {
 
 io.on("connection", (socket) => {
   console.log("connected");
-  socket.on("chat message", (msg) => {
-    console.log("received from client: ", msg);
-    // io.emit('chat message', msg);
-    // io.emit("chat message", "hi from server");
+  const data = {
+    allLogs: getAllLogs()
+  };
+  io.emit('display-logs', data);
+  socket.on("store-logs", (msg) => {
+    console.log("received from exampple project client: ", msg);
+    // store the logs.
   });
 });
 
