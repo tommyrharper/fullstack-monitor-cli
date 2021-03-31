@@ -49,7 +49,7 @@ io.on("connection", (socket) => {
     io.emit('display-logs', data);
   });
   socket.on("store-logs", (logsObj) => {
-    storeLogs(logsObj.type, logsObj.logs, io);
+    storeLogs(logsObj.class, logsObj.logs, io);
   });
 });
 
